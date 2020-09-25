@@ -31,7 +31,7 @@ public class PaymentMethod implements java.io.Serializable {
 
 	public PaymentMethod() {
 	}
-
+	
 	public PaymentMethod(Integer payId, String enable, String name, List<ShoppingCart> shoppingCarts) {
 		this.payId = payId;
 		this.enable = enable;
