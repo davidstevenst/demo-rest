@@ -54,12 +54,10 @@ class ShoppingCartServiceTest {
 		shoppingcart.setEnable("Y");
 		
 		Optional<Customer> customerOptional=customerService.findById(cemail);
-		assertTrue(customerOptional.isPresent(), "El customer no existe");
 		Customer customer = customerOptional.get();
 		shoppingcart.setCustomer(customer);
 		
 		Optional<PaymentMethod> paymentMethodOptional=paymentMethodService.findById(paymethodid);
-		assertTrue(paymentMethodOptional.isPresent(), "El payment method no existe");
 		PaymentMethod paymentmethod = paymentMethodOptional.get();
 		
 		shoppingcart.setPaymentMethod(paymentmethod);
@@ -68,7 +66,6 @@ class ShoppingCartServiceTest {
 		
 		carId=shoppingcart.getCarId();
 		
-		assertNotNull(carId, "El carId es nulo");
 		
 		
 	}
@@ -78,8 +75,7 @@ class ShoppingCartServiceTest {
 	void findbyid() throws Exception {
 		Optional<ShoppingCart> shoppingcartoptional= shoppingCartService.findById(carId);
 		
-		assertTrue(shoppingcartoptional.isPresent(), "El shoppingcart no existe");
-
+		log.info("Total "+shoppingcartoptional.get().getTotal());
 		
 	}
 	
@@ -89,11 +85,9 @@ class ShoppingCartServiceTest {
 	void update() throws Exception {
 		Optional<ShoppingCart> shoppingcartoptional= shoppingCartService.findById(carId);
 		
-
-		
 		ShoppingCart shoppingcart = shoppingcartoptional.get();
-		shoppingcart.setEnable("Y");
-		shoppingCartService.save(shoppingcart);
+		shoppingcart.setEnable("N");
+		shoppingCartService.update(shoppingcart);
 		
 	}
 	

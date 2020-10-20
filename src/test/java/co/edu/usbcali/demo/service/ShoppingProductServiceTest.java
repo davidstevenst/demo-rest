@@ -104,7 +104,7 @@ private final static Logger log=LoggerFactory.getLogger(ShoppingProduct.class);
 		
 		shoppingproduct.setQuantity(3);
 		
-		shoppingProductService.save(shoppingproduct);
+		shoppingProductService.update(shoppingproduct);
 	}
 	
 	

@@ -122,7 +122,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Override
 	@Transactional(readOnly = true)
 	public Long count() {
-		// TODO Auto-generated method stub
+	
 		return shoppingCartRepository.count();
 	}
 

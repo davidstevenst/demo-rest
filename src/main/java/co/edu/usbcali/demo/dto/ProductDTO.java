@@ -1,17 +1,31 @@
 package co.edu.usbcali.demo.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class ProductDTO {
-	
+	@NotNull
+	@Size(min = 1, max = 255)
 	private String proId;
 	
+	@NotNull
+	@Size(min = 1, max = 255)
 	private String detail;
 	
+	@NotNull
+	@Size(min=1 , max = 1)
 	private String enable;
 	
+	@NotNull
+	@Size(min = 1, max = 255)
 	private String image;
 	
+	@NotNull
+	@Size(min = 1, max = 255)
 	private String name;
 	
+	@NotNull
 	private Integer price;
 
 	public ProductDTO() {

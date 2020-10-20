@@ -9,6 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 
@@ -20,20 +24,39 @@ public class Customer implements java.io.Serializable {
 	
 	@Id
 	@Column(name = "email", unique = true, nullable = false)
+	@NotNull
+	@Email
+	@Size(min = 3, max = 255)
 	private String email;
 	
+	@NotNull
+	@Size(min = 3, max = 255)
+	@NotEmpty
 	@Column(name = "address", nullable = false)
 	private String address;
 	
+		
+	@NotNull
+	@NotEmpty
+	@Size(min = 1, max = 1)
 	@Column(name = "enable", nullable = false)
 	private String enable;
 	
+	@NotNull
+	@NotEmpty
+	@Size(min = 4, max = 255)
 	@Column(name = "name", nullable = false)
 	private String name;
 	
+	@NotNull
+	@NotEmpty
+	@Size(min = 6, max = 255)
 	@Column(name = "phone", nullable = false)
 	private String phone;
 	
+	@NotNull
+	@NotEmpty
+	@Size(max = 255)
 	@Column(name = "token", nullable = false)
 	private String token;
 	

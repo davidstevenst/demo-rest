@@ -2,6 +2,8 @@ package co.edu.usbcali.demo.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -14,6 +16,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.usbcali.demo.domain.PaymentMethod;
+import co.edu.usbcali.demo.domain.ShoppingCart;
 
 
 
@@ -51,10 +54,12 @@ class PaymentMethodServiceTest {
 	@Order(2)
 	void findById() throws Exception {
 		
-		assertTrue(paymentMethodService.findById(payId).isPresent());
-		PaymentMethod paymentMethod = paymentMethodService.findById(payId).get();
+		Optional<PaymentMethod> paymentmethodoptional= paymentMethodService.findById(payId);
+	
 		
-		assertNotNull(paymentMethod,"El paymentMethod no existe");
+		log.info("Nombre "+paymentmethodoptional.get().getName());
+		
+
 		
 	}
 	
@@ -63,7 +68,7 @@ class PaymentMethodServiceTest {
 	void update() throws Exception {
 		assertTrue(paymentMethodService.findById(payId).isPresent());
 		PaymentMethod paymentMethod = paymentMethodService.findById(payId).get();
-		paymentMethod.setEnable("Y");
+		paymentMethod.setEnable("N");
 		paymentMethodService.update(paymentMethod);
 		
 		

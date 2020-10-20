@@ -2,6 +2,11 @@ package co.edu.usbcali.demo.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,6 +24,12 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	CustomerRepository customerRepository;
 
+	@Autowired
+	Validator validator;
+	
+	
+	
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Customer> findAll() {
@@ -61,7 +72,7 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		validate(entity);
 		
-		//Si no existe lanza el error
+
 		if(customerRepository.existsById(entity.getEmail()) == false) {
 			throw new Exception("El customer con id: "+entity.getEmail()+" no existe");
 		}
@@ -107,6 +118,8 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		if(customerRepository.existsById(id)) {
 			delete(customerRepository.findById(id).get());
+		}else {
+			throw new Exception("El customer con id "+id+ " No existe");
 		}
 		
 	}
@@ -118,32 +131,15 @@ public class CustomerServiceImpl implements CustomerService {
 		if(entity==null) {
 			throw new Exception("El customer es nulo");
 		}
+		
+		Set<ConstraintViolation<Customer>> constraintViolation =validator.validate(entity);
+		
+		if(constraintViolation.isEmpty()==false) {
+			throw new ConstraintViolationException(constraintViolation);
+		}
 
 		
-		if(entity.getAddress()==null || entity.getAddress().isBlank() ==true) {
-			throw new Exception("La dirección es obligatoria");
-		}
 		
-		if(entity.getEmail()==null || entity.getEmail().isBlank() ==true) {
-			throw new Exception("El email es obligatorio");
-		}
-		
-		if(entity.getEnable()==null || entity.getEnable().isBlank() ==true) {
-			throw new Exception("El enable es obligatorio");
-		}
-		
-		if(entity.getName()==null || entity.getName().isBlank() ==true) {
-			throw new Exception("El nombre es obligatorio");
-		}
-		
-		if(entity.getPhone()==null || entity.getPhone().isBlank() ==true) {
-			throw new Exception("El phone es obligatorio");
-		}
-		
-		
-		if(entity.getToken()==null || entity.getToken().isBlank() ==true) {
-			throw new Exception("El token es obligatorio");
-		}
 		
 	}
 

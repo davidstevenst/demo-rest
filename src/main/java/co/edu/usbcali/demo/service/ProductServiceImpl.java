@@ -2,6 +2,11 @@ package co.edu.usbcali.demo.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,6 +24,8 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductRepository productRepository;
 	
+	@Autowired
+	Validator validator;
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -94,6 +101,8 @@ public class ProductServiceImpl implements ProductService {
 		
 		if(productRepository.existsById(id)) {
 			delete(productRepository.findById(id).get());
+		}else {
+			throw new Exception("El producto no existe");
 		}
 		
 	}
@@ -111,27 +120,10 @@ public class ProductServiceImpl implements ProductService {
 			throw new Exception("El product es nulo");
 		}
 		
-		if(entity.getProId() == null || entity.getProId().isBlank()==true) {
-			throw new Exception("El proid es nulo o está vacio");
-		}
+		Set<ConstraintViolation<Product>> constraintViolation =validator.validate(entity);
 		
-		if(entity.getDetail() == null || entity.getDetail().isBlank()==true) {
-			throw new Exception("El detail es nulo o está vacio");
-		}
-		
-		if(entity.getEnable() == null || entity.getEnable().isBlank()==true) {
-			throw new Exception("El enable es nulo o está vacio");
-		}
-		
-		if(entity.getImage() == null || entity.getImage().isBlank()==true) {
-			throw new Exception("La imagen es nulo o está vacio");
-		}
-		
-		if(entity.getName() == null || entity.getName().isBlank()==true) {
-			throw new Exception("El nombre es nulo o está vacio");
-		}
-		if(entity.getPrice() == null) {
-			throw new Exception("El precio es nulo");
+		if(constraintViolation.isEmpty()==false) {
+			throw new ConstraintViolationException(constraintViolation);
 		}
 		
 	}

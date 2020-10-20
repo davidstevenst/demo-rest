@@ -9,6 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author Zathura Code Generator http://zathuracode.org/ www.zathuracode.org
@@ -47,6 +50,9 @@ public class Product implements java.io.Serializable {
 	}
 
 	@Id
+	@NotNull
+	@Size(min = 1, max = 255)
+	@NotEmpty
 	@Column(name = "pro_id", unique = true, nullable = false)
 	public String getProId() {
 		return this.proId;
@@ -57,6 +63,9 @@ public class Product implements java.io.Serializable {
 	}
 
 	@Column(name = "detail", nullable = false)
+	@NotNull
+	@Size(min = 1, max = 255)
+	@NotEmpty
 	public String getDetail() {
 		return this.detail;
 	}
@@ -65,6 +74,9 @@ public class Product implements java.io.Serializable {
 		this.detail = detail;
 	}
 
+	@NotNull
+	@Size(min=1 , max = 1)
+	@NotEmpty
 	@Column(name = "enable", nullable = false)
 	public String getEnable() {
 		return this.enable;
@@ -74,6 +86,9 @@ public class Product implements java.io.Serializable {
 		this.enable = enable;
 	}
 
+	@NotNull
+	@Size(min = 1, max = 255)
+	@NotEmpty
 	@Column(name = "image", nullable = false)
 	public String getImage() {
 		return this.image;
@@ -83,6 +98,9 @@ public class Product implements java.io.Serializable {
 		this.image = image;
 	}
 
+	@NotNull
+	@Size(min = 1, max = 255)
+	@NotEmpty
 	@Column(name = "name", nullable = false)
 	public String getName() {
 		return this.name;
@@ -91,7 +109,8 @@ public class Product implements java.io.Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	@NotNull
 	@Column(name = "price", nullable = false)
 	public Integer getPrice() {
 		return this.price;
