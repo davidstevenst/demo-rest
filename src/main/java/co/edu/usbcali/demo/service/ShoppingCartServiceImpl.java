@@ -97,14 +97,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		if(entity.getCustomer() == null) {
 			throw new Exception("El customer es nulo");
 		}
+	
 		
-		if(entity.getPaymentMethod() == null) {
-			throw new Exception("El payment method es nulo");
-		}
-		
-		if(entity.getItems() == null || entity.getItems()<1) {
-			throw new Exception("Los items son nulos o vacios");
-		}
+
 		
 		if(entity.getEnable() == null || entity.getEnable().isBlank()) {
 			throw new Exception("El enable esta vacio o nulo");

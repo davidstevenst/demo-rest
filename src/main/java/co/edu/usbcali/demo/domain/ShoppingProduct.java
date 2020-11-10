@@ -52,7 +52,7 @@ public class ShoppingProduct implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pro_id")
+	@JoinColumn(name = "pro_id")	
 	public Product getProduct() {
 		return this.product;
 	}

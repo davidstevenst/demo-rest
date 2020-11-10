@@ -110,4 +110,17 @@ class ShoppingCartServiceTest {
 		
 		log.info("Count "+shoppingCartService.count());
 	}
+	
+	@Test
+	void test() {
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
 }

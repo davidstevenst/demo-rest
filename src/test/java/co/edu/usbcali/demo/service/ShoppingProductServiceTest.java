@@ -1,27 +1,22 @@
 package co.edu.usbcali.demo.service;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.usbcali.demo.domain.Product;
 import co.edu.usbcali.demo.domain.ShoppingCart;
 import co.edu.usbcali.demo.domain.ShoppingProduct;
-import co.edu.usbcali.demo.repository.ProductRepository;
-import co.edu.usbcali.demo.repository.ShoppingCartRepository;
-import co.edu.usbcali.demo.repository.ShoppingProductRepository;
 
 
 @Rollback(false)
@@ -97,7 +92,7 @@ private final static Logger log=LoggerFactory.getLogger(ShoppingProduct.class);
 	@Test
 	@Order(3)
 	void Update() throws Exception {
-		Integer productcambiar=1;
+		
 		Optional<ShoppingProduct> shopproductOptional = shoppingProductService.findById(shprId);
 		
 		ShoppingProduct shoppingproduct = shopproductOptional.get();
@@ -124,6 +119,16 @@ private final static Logger log=LoggerFactory.getLogger(ShoppingProduct.class);
 	void count() throws Exception{
 
 		log.info("Count: "+shoppingProductService.count());
+	}
+	
+	
+	@Test
+	void test() {
+		Long total =0L;
+		
+		total = shoppingProductService.totalShoppingProductByShoppingCart(carId);
+		
+		assertTrue(total>0);
 	}
 	
 }
