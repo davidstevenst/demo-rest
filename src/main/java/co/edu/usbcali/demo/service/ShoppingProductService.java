@@ -1,6 +1,9 @@
 
 package co.edu.usbcali.demo.service;
 
+
+import java.util.List;
+
 import co.edu.usbcali.demo.domain.ShoppingProduct;
 
 
@@ -12,5 +15,11 @@ import co.edu.usbcali.demo.domain.ShoppingProduct;
 public interface ShoppingProductService extends GenericService<ShoppingProduct, Integer> {
 	
 	public Long totalShoppingProductByShoppingCart(Integer carId);
+	public Integer findByproIdandcarId(Integer carId, String proId);
+	public void deleteByCarId(Integer carId);
+	public List<ShoppingProduct> findByCarId(Integer carId);
+	public Integer findProductInShoppingCart(Integer carId, String proId);
+	
+	
 	
 }

@@ -30,4 +30,10 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 	
 	public List<Product> findByEnable(String enable);
 	
+	
+	@Query("SELECT pro FROM Product pro WHERE pro.enable='Y'")
+	public List<Product> findByEnableY();
+	
+	
+	
 }

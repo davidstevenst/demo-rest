@@ -20,6 +20,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	@Autowired
 	ShoppingCartRepository shoppingCartRepository;
 	
+	@Autowired
+	CustomerService customerService;
+	
+	
 	
 	@Override
 	@Transactional(readOnly = true)
@@ -99,15 +103,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 		}
 	
 		
-
-		
 		if(entity.getEnable() == null || entity.getEnable().isBlank()) {
 			throw new Exception("El enable esta vacio o nulo");
 		}
 		
-		if(entity.getTotal() == null) {
-			throw new Exception("El total esta vacio");
-		}
+	
 		
 		
 		
@@ -120,5 +120,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	
 		return shoppingCartRepository.count();
 	}
+
+
 
 }

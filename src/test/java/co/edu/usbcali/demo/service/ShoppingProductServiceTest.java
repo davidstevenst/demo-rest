@@ -123,12 +123,18 @@ private final static Logger log=LoggerFactory.getLogger(ShoppingProduct.class);
 	
 	
 	@Test
-	void test() {
+	void sacatotal() {
 		Long total =0L;
 		
 		total = shoppingProductService.totalShoppingProductByShoppingCart(carId);
 		
 		assertTrue(total>0);
 	}
+	
+	
+
+	
+	
+	
 	
 }

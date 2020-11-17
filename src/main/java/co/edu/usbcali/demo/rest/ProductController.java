@@ -108,6 +108,19 @@ public class ProductController {
 			return ResponseEntity.ok().body("Ok");
 		
 	}
+	
+	
+	
+	@GetMapping("/findAllEnableY")
+	public ResponseEntity<?> findAllEnableY() throws Exception{
+		
+		List<Product> products = productService.findAllEnable();
+		List<ProductDTO> productDTOs=productMapper.toProductsDTO(products);
+		
+
+		return ResponseEntity.ok().body(productDTOs);
+		
+	}
 
 	
 	

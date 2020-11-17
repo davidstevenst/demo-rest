@@ -124,7 +124,26 @@ public class CustomerServiceImpl implements CustomerService {
 		
 	}
 
-	
+
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Customer> loginCustomerByEmailAndToken(String email, String token) throws Exception {
+		
+		if(customerRepository.findById(email).isPresent() == false) {
+			throw new Exception("El customer no existe");
+		}
+		
+		if(email == null || email.isBlank() == true || email.equals("")) {
+			throw new Exception("El email está nulo o vacio");
+		}
+		
+		if(token == null || token.isBlank() == true || token.equals("")) {
+			throw new Exception("El token está nulo");
+		}
+		
+		
+		return customerRepository.loginCustomerByEmailAndToken(email, token);
+	}
 
 	@Override
 	public void validate(Customer entity) throws Exception {
@@ -142,6 +161,8 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		
 	}
+
+
 
 	
 

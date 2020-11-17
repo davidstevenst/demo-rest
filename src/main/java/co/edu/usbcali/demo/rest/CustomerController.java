@@ -104,5 +104,23 @@ public class CustomerController {
 		
 	}
 	
+	@GetMapping("/loginCustomerAuth/{email}/{token}")
+	public ResponseEntity<?> loginCustomerByEmailAndToken(@PathVariable("email") String email,
+														  @PathVariable("token") String token) throws Exception {
+		
+		customerService.loginCustomerByEmailAndToken(email, token);
+
+		return ResponseEntity.ok().body(customerService.loginCustomerByEmailAndToken(email, token));
+	
+	}
+	
+	@PostMapping("/loginCustomerAuth")
+	public ResponseEntity<?> loginCustomerByEmailAndToken(@RequestBody CustomerDTO customerDTO) throws Exception {
+		
+
+		return ResponseEntity.ok().body(customerService.loginCustomerByEmailAndToken(customerDTO.getEmail(), customerDTO.getToken()));
+	
+	}
+	
 	
 }

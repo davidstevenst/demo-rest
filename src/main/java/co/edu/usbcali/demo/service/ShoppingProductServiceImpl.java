@@ -136,10 +136,46 @@ public class ShoppingProductServiceImpl implements ShoppingProductService {
 
         return shoppingProductRepository.findById(shprId);
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Integer findByproIdandcarId(Integer carId, String proId){
+    	
+    	return shoppingProductRepository.findByproIdandcarId(carId, proId);
+    	
+    }
+    
 
 	@Override
 	@Transactional(readOnly = true)
 	public Long totalShoppingProductByShoppingCart(Integer carId) {	
 		return shoppingProductRepository.totalShoppingProductByShoppingCart(carId);
 	}
+	
+	@Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public void deleteByCarId(Integer carId) {
+		
+		shoppingProductRepository.deleteBycarId(carId);
+		
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<ShoppingProduct> findByCarId(Integer carId) {
+		
+		return shoppingProductRepository.findByCarId(carId);
+		
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Integer findProductInShoppingCart(Integer carId, String proId) {
+		
+		return shoppingProductRepository.findProductInShoppingCart(carId, proId);
+	}
+	
+	
+	
+	
 }

@@ -29,6 +29,8 @@ public class ShoppingProduct implements java.io.Serializable {
 	
 	private Long total;
 
+	
+	
 	public ShoppingProduct() {
 	}
 
@@ -80,7 +82,7 @@ public class ShoppingProduct implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
-	@Column(name = "total", nullable = false)
+	@Column(name = "total")
 	public Long getTotal() {
 		return this.total;
 	}

@@ -105,7 +105,7 @@ public class ShoppingCart implements java.io.Serializable {
 		this.items = items;
 	}
 
-	@Column(name = "total", nullable = false)
+	@Column(name = "total")
 	public Long getTotal() {
 		return this.total;
 	}

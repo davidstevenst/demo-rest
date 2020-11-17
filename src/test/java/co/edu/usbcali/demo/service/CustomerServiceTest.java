@@ -1,13 +1,11 @@
 package co.edu.usbcali.demo.service;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Optional;
 
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.slf4j.Logger;
@@ -105,6 +103,17 @@ class CustomerServiceTest {
 	
 		
 
+	}
+	
+	
+	@Test
+	void loginCustomerByEmailAndToken() throws Exception {
+		String email="wheliotl@amazon.co.uk";
+		String token="cbae19927840dc9f64342e7f29c02ddef6d6cf98";
+		
+	
+		log.info(customerService.loginCustomerByEmailAndToken(email, token).get().getEmail());
+		
 	}
 	
 

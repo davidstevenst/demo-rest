@@ -135,4 +135,12 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.count();
 	}
 
+
+
+	@Override
+	public List<Product> findAllEnable() {
+		
+		return productRepository.findByEnableY();
+	}
+
 }
