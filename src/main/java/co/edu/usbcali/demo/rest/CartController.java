@@ -3,6 +3,7 @@ package co.edu.usbcali.demo.rest;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.catalina.connector.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.usbcali.demo.domain.ShoppingCart;
 import co.edu.usbcali.demo.domain.ShoppingProduct;
+import co.edu.usbcali.demo.dto.ShoppingCartDTO;
 import co.edu.usbcali.demo.dto.ShoppingProductDTO;
 import co.edu.usbcali.demo.mapper.ShoppingCartMapper;
 import co.edu.usbcali.demo.mapper.ShoppingProductMapper;
@@ -117,6 +119,36 @@ public class CartController {
 		
 	}
 	
+	@GetMapping("/pagarCarro/{carId}/{payId}")
+	public ResponseEntity<?> pagarCarro(@PathVariable("carId") Integer carId,@PathVariable("payId") Integer payId) throws Exception{
+		
+		
+		cartService.updateCarroPagado(carId, payId);
+		return ResponseEntity.ok().build();
+		
+	}
 	
+	@GetMapping("/findCart/{carId}")
+	public ResponseEntity<?> findCart(@PathVariable("carId")Integer carId)throws Exception{
+		
+		Optional<ShoppingCart> shoppingCartOptional = cartService.findCart(carId);
+		
+		ShoppingCart shoppingCart = shoppingCartOptional.get();
+		
+		
+		
+		ShoppingCartDTO shoppingCartDTO = shoppingCartMapper.toShoppingCartDTO(shoppingCart);
+		
+		return ResponseEntity.ok().body(shoppingCartDTO);
+	}
+	
+	@GetMapping("/findCompras/{email}")
+	public ResponseEntity<?> findCompras(@PathVariable("email") String email)throws Exception{
+		
+		
+		List<ShoppingProductDTO> shoppingProductsDTO = shoppingProductMapper.toShoppingProductsDTO(cartService.findCompras(email));
+		
+		return ResponseEntity.ok().body(shoppingProductsDTO);
+	}
 
 }

@@ -14,6 +14,7 @@ import co.edu.usbcali.demo.domain.Product;
 import co.edu.usbcali.demo.domain.ShoppingCart;
 import co.edu.usbcali.demo.domain.ShoppingProduct;
 import co.edu.usbcali.demo.repository.ShoppingCartRepository;
+import co.edu.usbcali.demo.repository.ShoppingProductRepository;
 
 @Service
 @Scope("singleton")
@@ -29,10 +30,16 @@ public class CartServiceImpl implements CartService {
 	ProductService productService;
 	
 	@Autowired
+	PaymentMethodService paymentMethodService;
+	
+	@Autowired
 	ShoppingProductService shoppingProductService;
 	
 	@Autowired
 	ShoppingCartRepository shoppingCartRepository;
+	
+	@Autowired
+	ShoppingProductRepository shoppingProductRepository;
 
 	@Override
 	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
@@ -277,6 +284,50 @@ public class CartServiceImpl implements CartService {
 		
 		return shoppingCartRepository.findShoppingCartActive(email);
 	}
+
+	@Override
+	@Transactional(readOnly = false,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	public void updateCarroPagado(Integer carId, Integer payId) throws Exception {
+		
+		if(shoppingCartService.findById(carId).isPresent()== false) {
+			throw new Exception("El carId no existe");
+		}
+		
+		if(paymentMethodService.findById(payId).isPresent() == false || payId == null) {
+			throw new Exception("Error con el metodo de pago");
+		}
+		
+		
+		if(payId<1 || payId ==null) {
+			throw new Exception("Seleccione un Metodo de pago");
+		}
+		
+		 shoppingCartRepository.updatePagarCarro(carId, payId);
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<ShoppingCart> findCart(Integer carId)throws Exception{
+	
+		return shoppingCartRepository.findById(carId);
+		
+	}
+
+	@Override
+	public List<ShoppingProduct> findCompras(String email) throws Exception {
+		
+		if(customerService.findById(email).isPresent() == false) {
+			throw new Exception("El email no existe");
+		}
+		
+		
+		return shoppingProductRepository.findCompras(email);
+	}
+
+
+	
+
+
 
 
 }

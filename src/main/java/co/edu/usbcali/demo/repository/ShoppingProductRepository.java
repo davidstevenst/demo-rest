@@ -22,12 +22,16 @@ public interface ShoppingProductRepository extends JpaRepository<ShoppingProduct
 	@Query("DELETE FROM ShoppingProduct shpr WHERE shpr.shoppingCart.carId=:carId")
 	public void deleteBycarId(Integer carId);
 	
-	@Query("SELECT shpr from ShoppingProduct shpr WHERE shpr.shoppingCart.carId=:carId")
+	@Query("SELECT shpr FROM ShoppingProduct shpr WHERE shpr.shoppingCart.carId=:carId")
 	public List<ShoppingProduct> findByCarId(Integer carId);
 	
-	
-	@Query("SELECT shpr.shprId from ShoppingProduct shpr WHERE shpr.shoppingCart.carId=:carId AND shpr.product.proId=:proId")
+	@Query("SELECT shpr.shprId FROM ShoppingProduct shpr WHERE shpr.shoppingCart.carId=:carId AND shpr.product.proId=:proId")
 	public Integer findProductInShoppingCart(Integer carId, String proId);
+	
+	@Query("SELECT shpr FROM ShoppingProduct shpr WHERE shpr.shoppingCart.customer.email=:email AND shpr.shoppingCart.enable='P'")
+	public List<ShoppingProduct> findCompras(String email);
+	
+	
 	
 	
 }
