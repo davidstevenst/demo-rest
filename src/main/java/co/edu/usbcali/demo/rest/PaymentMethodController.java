@@ -95,7 +95,7 @@ public class PaymentMethodController {
 
 					
 
-		return ResponseEntity.badRequest().body(paymentMethodDTO);
+		return ResponseEntity.ok().body(paymentMethodDTO);
 	
 }
 	

@@ -96,7 +96,7 @@ public class ProductController {
 
 					
 
-		return ResponseEntity.badRequest().body(productDTO);
+		return ResponseEntity.ok().body(productDTO);
 	
 }
 	

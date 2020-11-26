@@ -10,6 +10,7 @@ import co.edu.usbcali.demo.dto.ShoppingProductDTO;
 
 @Mapper
 public interface ShoppingProductMapper {
+	
 	@Mapping(source="product.proId", target="proId")
 	
 	@Mapping(source="product.name", target="name")
