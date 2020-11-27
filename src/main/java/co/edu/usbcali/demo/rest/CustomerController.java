@@ -117,7 +117,7 @@ public class CustomerController {
 	@PostMapping("/loginCustomerAuth")
 	public ResponseEntity<?> loginCustomerByEmailAndToken(@RequestBody CustomerDTO customerDTO) throws Exception {
 		
-
+		
 		return ResponseEntity.ok().body(customerService.loginCustomerByEmailAndToken(customerDTO.getEmail(), customerDTO.getToken()));
 	
 	}

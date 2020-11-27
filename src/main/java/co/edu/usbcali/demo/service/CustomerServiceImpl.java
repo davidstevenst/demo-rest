@@ -140,7 +140,10 @@ public class CustomerServiceImpl implements CustomerService {
 		if(token == null || token.isBlank() == true || token.equals("")) {
 			throw new Exception("El token está nulo");
 		}
-		
+	
+		if(customerRepository.loginCustomerByEmailAndToken(email, token).isPresent() == false) {
+			throw new Exception("Error con los datos de inicio de sesión");
+		}
 		
 		return customerRepository.loginCustomerByEmailAndToken(email, token);
 	}
