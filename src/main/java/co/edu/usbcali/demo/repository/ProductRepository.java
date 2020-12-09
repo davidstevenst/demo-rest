@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import co.edu.usbcali.demo.domain.Product;
 
@@ -34,6 +35,9 @@ public interface ProductRepository extends JpaRepository<Product, String> {
 	@Query("SELECT pro FROM Product pro WHERE pro.enable='Y'")
 	public List<Product> findByEnableY();
 	
+	
+	@Query("SELECT pro FROM Product pro WHERE pro.name LIKE %:busqueda% OR pro.detail LIKE %:busqueda% AND pro.enable='Y'")
+	public List<Product> findBusqueda(@Param("busqueda") String busqueda);
 	
 	
 }

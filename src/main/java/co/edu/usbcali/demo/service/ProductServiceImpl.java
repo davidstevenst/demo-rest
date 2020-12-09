@@ -143,4 +143,16 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findByEnableY();
 	}
 
+	@Override
+	public List<Product> findBusqueda(String busqueda)throws Exception {
+		
+		if(busqueda == null) {
+			
+			throw new Exception("Campo vacio o nulo");
+			
+		}
+		
+		return productRepository.findBusqueda(busqueda);
+	}
+
 }

@@ -8,6 +8,8 @@ public interface ProductService extends GenericService<Product, String>{
 	
 	public List<Product> findAllEnable();
 	
+	public List<Product> findBusqueda(String busqueda) throws Exception;
+	
 	
 	
 }

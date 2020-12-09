@@ -121,6 +121,19 @@ public class ProductController {
 		return ResponseEntity.ok().body(productDTOs);
 		
 	}
+	
+	
+	@GetMapping("/findBusqueda/{busqueda}")
+	public ResponseEntity<?> findBusqueda(@PathVariable("busqueda") String busqueda) throws Exception{
+		
+		List<Product> products = productService.findBusqueda(busqueda);
+		
+		List<ProductDTO> productsDTO = productMapper.toProductsDTO(products);
+		
+		
+		return ResponseEntity.ok().body(productsDTO);
+		
+	}
 
 	
 	
